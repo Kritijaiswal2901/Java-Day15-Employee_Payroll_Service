@@ -1,6 +1,10 @@
  package com.employee;
 
- import java.io.IOException;
+ import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -112,5 +116,50 @@ public class FileOperations {
             e.printStackTrace();
         }
     }
+
+    public static boolean doesFileExist(String filePath) {
+        try {
+            Path path = Paths.get(filePath);
+            return Files.exists(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+
+    public static void writeDataToFile(String filePath, String data) {
+        if (doesFileExist(filePath)) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+                writer.write(data);
+                writer.newLine();
+            } catch (IOException exception) {
+                System.out.println(exception.getMessage());
+                exception.printStackTrace();
+            }
+        } else {
+            System.out.println("File does not exist: " + filePath);
+        }
+    }
+
+    // Method to count the number of lines in a file
+    public static int countLines(String filePath) {
+        if (doesFileExist(filePath)) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+                int count = 0;
+                while (reader.readLine() != null) {
+                    count++;
+                }
+                return count;
+            } catch (IOException exception) {
+                System.out.println(exception.getMessage());
+                exception.printStackTrace();
+                return -1;
+            }
+        }
+        System.out.println("File does not exist: " + filePath);
+        return -1;
+    }
+
 }
 

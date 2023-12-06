@@ -6,7 +6,17 @@ import java.util.Scanner;
 
 public class EmployeePayrollService {
     private List<EmployeePayroll> employees;
+    private String filePath;
 
+
+    
+    public EmployeePayrollService(String filePath) {
+        this.filePath = filePath;
+        FileOperations.createEmptyFile(filePath);
+    }
+    public String getFilePath() {
+        return this.filePath;
+    }
     public EmployeePayrollService() {
         this.employees = new ArrayList<>();
     }
@@ -14,6 +24,17 @@ public class EmployeePayrollService {
     public List<EmployeePayroll> getEmployees() {
         return this.employees;
     }
+
+        // method to add new employee to the file
+        public void addEmployeeToFile(EmployeePayroll employee) {
+            FileOperations.writeDataToFile(filePath, employee.toString());
+        }
+    
+        // method to count number of empl oyees in file
+        public int countEmployeesInFile() {
+            return FileOperations.countLines(this.filePath);
+        }
+    
 
     public void addEmployee(EmployeePayroll employee) {
         this.employees.add(employee);
