@@ -161,5 +161,27 @@ public class FileOperations {
         return -1;
     }
 
+    
+    // Method to read data from file and return as String
+    public static String readFileContent(String filePath) {
+        if (doesFileExist(filePath)) {
+            StringBuilder fileContent = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    fileContent.append(line).append("\n");
+                }
+                return fileContent.toString();
+            } catch (IOException exception) {
+                System.out.println("Error  in reading file content: " + exception.getMessage());
+                exception.printStackTrace();
+                return null;
+            }
+        }
+        System.out.println("File does not exist: " + filePath);
+        return null;
+    }
+
+
 }
 

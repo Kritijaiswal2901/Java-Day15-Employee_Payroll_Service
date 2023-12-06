@@ -7,8 +7,6 @@ import java.util.Scanner;
 public class EmployeePayrollService {
     private List<EmployeePayroll> employees;
     private String filePath;
-
-
     
     public EmployeePayrollService(String filePath) {
         this.filePath = filePath;
@@ -30,16 +28,18 @@ public class EmployeePayrollService {
             FileOperations.writeDataToFile(filePath, employee.toString());
         }
     
-        // method to count number of empl oyees in file
+        // method to count number of employees in file
         public int countEmployeesInFile() {
             return FileOperations.countLines(this.filePath);
         }
-    
 
+        public void printEmployeesDataFromFile(){
+            System.out.println(FileOperations.readFileContent(this.filePath));
+        }
+    
     public void addEmployee(EmployeePayroll employee) {
         this.employees.add(employee);
     }
-
     public void recordEmployeeData(Scanner inputScanner) {
         System.out.print("\nEmployee Id: ");
         int id = inputScanner.nextInt();
