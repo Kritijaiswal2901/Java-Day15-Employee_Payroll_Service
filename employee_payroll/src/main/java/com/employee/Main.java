@@ -16,6 +16,9 @@ public class Main {
         employeePayrollService.addEmployeeToFile(new EmployeePayroll(200, "Joe", 20000));
         System.out.println(employeePayrollService.countEmployeesInFile());
 
+        System.out.println("EmployeePayroll File Data: ");
+        employeePayrollService.printEmployeesDataFromFile();
+
 
 
     }
