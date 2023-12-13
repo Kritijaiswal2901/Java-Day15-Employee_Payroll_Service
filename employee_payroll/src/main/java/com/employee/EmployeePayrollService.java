@@ -64,7 +64,6 @@ public class EmployeePayrollService {
         sortedList.forEach(System.out::println);
     }
 
-
     public void addEmployee(EmployeePayroll employee) {
         this.employees.add(employee);
     }
@@ -96,5 +95,28 @@ public class EmployeePayrollService {
             data.append(employee.toString()).append("\n");
         }
         return data.toString();
+    }
+
+    public void connectDatabase() {
+        DbOperations.getConnection();
+    }
+
+    public ArrayList<Employee> getEmployeesFromDB() {
+        return DbOperations.readEmployees();
+    }
+
+    // method to update salary in database
+    public void updateSalaryInDB(int salary, String name) {
+        DbOperations.updateSalary(salary, name);
+    }
+
+    // method to allow custom query execution
+    public ArrayList<String> getQueryDataFromDB(String query) {
+        return DbOperations.getData(query);
+    }
+
+    // method to get salary stats by gender
+    public ArrayList<String> getStatsByGenderFromDB(String query) {
+        return DbOperations.getStatsByGender(query);
     }
 }
